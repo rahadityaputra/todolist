@@ -1,7 +1,7 @@
 const isiList = document.getElementById("input-list");
-const tombolTambahList = document.querySelector(".button-add");
 const daftarList = document.querySelector(".box-list");
 const spanList = document.querySelectorAll(".box-list .list > span");
+const container = document.querySelector('.container');
 
 function tambahList() {
 	if (isiList.value != "" && cekAdaList() && daftarList.childElementCount < 5) {
@@ -17,19 +17,18 @@ function tambahList() {
 }
 
 function buatTombol(listBaru) {
-	//membuat tombol hapus
-	const tombolHapus = document.createElement("div");
-	tombolHapus.classList.add("button-delete");
-	tombolHapus.innerHTML = `<span>Hapus</span>`;
-	listBaru.appendChild(tombolHapus);
-	tombolHapus.addEventListener("click", () => hapusList(listBaru));
-
+	
 	// membuat tombol selesai
-	const tombolSelesai = document.createElement("div");
+	const tombolSelesai = document.createElement("span");
 	tombolSelesai.classList.add("button-finish");
-	tombolSelesai.innerHTML = `<span>Selesai</span>`;
+	tombolSelesai.innerHTML = `Selesai`;
 	listBaru.appendChild(tombolSelesai);
-	tombolSelesai.addEventListener("click", () => selesaiList(listBaru));
+	
+	//membuat tombol hapus
+	const tombolHapus = document.createElement("span");
+	tombolHapus.classList.add("button-delete");
+	tombolHapus.innerHTML = `Hapus`;
+	listBaru.appendChild(tombolHapus);
 }
 
 function cekAdaList() {
@@ -50,12 +49,29 @@ function cekAdaList() {
 	}
 }
 
-function hapusList(list) {
-	daftarList.removeChild(list);
+function turun(buttonFinish) {
+	const list = buttonFinish.parentNode;
+	daftarList.appendChild(list);
 }
 
-function selesaiList(list) {
-	list.classList.add("selesai");
-}
+container.addEventListener('click', function (e) {
+	if (e.target.className == 'button-add') {
+		tambahList();
+	} else if (e.target.className == 'button-finish') {
+		// todo membuat list yang diberi tanda selesai turun ke urutan bawah
+		// 
+		turun(e.target);
+		e.target.previousElementSibling.style.textDecoration = 'line-through';
+	} else if (e.target.className == 'button-delete') {
+		e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+	}
+})
 
-tombolTambahList.addEventListener("click", tambahList);
+// untuk fitur mode gelap
+
+const buttonTheme = document.querySelector('.mode');
+const html = document.querySelector('html');
+
+buttonTheme.addEventListener('click', function () {
+	html.classList.toggle('gelap');
+})
