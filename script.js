@@ -3,84 +3,95 @@ const daftarList = document.querySelector(".box-list");
 const spanList = document.querySelectorAll(".box-list .list > span");
 const container = document.querySelector(".container");
 
-function tambahList() {
-	if (isiList.value != "" && cekAdaList() && daftarList.childElementCount < 5) {
-		const listBaru = document.createElement("div");
-		listBaru.classList.add("list");
-		const isiListBaru = document.createElement("span");
-		isiListBaru.innerHTML = isiList.value;
-		listBaru.appendChild(isiListBaru);
-		daftarList.appendChild(listBaru);
-		buatTombol(listBaru);
+// ==================Menyambungkan Ke Local Storage===================
+
+let kumpulanList = {};
+
+if (localStorage["program_todolist"]) {
+	kumpulanList = JSON.parse(localStorage["program_todolist"]);
+	for (let [list, status] of Object.entries(kumpulanList)) {
+		tambahElementList(list, status);
+	}
+}
+
+function syncLocalStorage(aktivitas, teks, status = false) {
+	switch (aktivitas) {
+		case "tambah":
+			kumpulanList[teks] = status;
+			break;
+		case "hapus":
+			delete kumpulanList[teks];
+			break;
+		case "hapus semua":
+			kumpulanList = {};
+			break;
+		default:
+			break;
+	}
+
+	return localStorage.setItem("program_todolist", JSON.stringify(kumpulanList));
+}
+// ==================Kode untuk fitur to do list===================
+
+function tambahDataList() {
+	if (isiList.value != "" && !cekAdaList(isiList.value)) {
+		syncLocalStorage("tambah", isiList.value);
+		tambahElementList(isiList.value);
 	}
 	isiList.value = "";
 }
 
-function buatTombol(listBaru) {
-	// membuat tombol selesai
-	const tombolSelesai = document.createElement("span");
-	tombolSelesai.classList.add("button", "button-finish");
-	tombolSelesai.innerHTML = `<svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-	<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-</svg>`;
-	listBaru.appendChild(tombolSelesai);
-
-	//membuat tombol hapus
-	const tombolHapus = document.createElement("span");
-	tombolHapus.classList.add("button", "button-delete");
-	tombolHapus.innerHTML = `<svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-	<path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-	></path>
-</svg>`;
-
-	listBaru.appendChild(tombolHapus);
+function tambahElementList(isiList, status = false) {
+	const listTerbaru = `<div class="list">
+							<span class=${status ? "selesai" : ""}>${isiList}</span>
+							<span class="button button-finish" onclick = "listSelesai(this.previousElementSibling)">
+                            	<svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                              	   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+                           		</svg>
+                       		 </span>
+                        	<span class="button button-delete" onclick = "hapusList(this)">
+                           		<svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                	<path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                            		    ></path>
+                         	   </svg>
+                        	</span>
+						</div>`;
+	daftarList.insertAdjacentHTML("beforeend", listTerbaru);
 }
 
-function cekAdaList() {
-	if (isiList.length == false) {
-		return true;
-	} else {
-		let count = 0;
-		for (let i = 0; i < document.querySelectorAll(".list > span").length; i++) {
-			if (document.querySelectorAll(".list > span")[i].textContent == isiList.value.trim()) {
-				count++;
-			}
-		}
-		if (count == false) {
-			return true;
-		} else {
-			return false;
-		}
+function listSelesai(list) {
+	syncLocalStorage("tambah", list.innerText, list.classList.toggle("selesai"));
+}
+
+function hapusList(tombolHapus) {
+	tombolHapus.parentNode.remove();
+	syncLocalStorage("hapus", tombolHapus.previousElementSibling.previousElementSibling.innerText);
+}
+
+function cekAdaList(isiList) {
+	let ada = false;
+	for(let list in kumpulanList){
+		ada = (list == isiList);
 	}
+	return ada;
 }
 
-function turun(buttonFinish) {
-	const list = buttonFinish.parentNode;
-	daftarList.appendChild(list);
-}
+
 
 container.addEventListener("click", function (e) {
-	// console.log(e.target);
 	if (e.target.className == "button button-add" || e.target.parentNode.className == "button button-add") {
-		tambahList();
-	} else if (e.target.className == "button button-finish" || e.target.parentNode.className == "button button-finish") {
-		if (e.target.className == "button button-finish") {
-			e.target.previousElementSibling.style.textDecoration = "line-through";
-			turun(e.target);
-		} else if (e.target.parentNode.className == "button button-finish") {
-			e.target.parentNode.previousElementSibling.style.textDecoration = "line-through";
-			turun(e.target.parentNode);
-		}
-	} else if (e.target.className == "button button-delete" || e.target.parentNode.className == "button button-delete") {
-		if (e.target.className == "button button-delete") {
-			e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-		} else if (e.target.parentNode.className == "button button-delete") {
-			e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
-		}
+		tambahDataList();
 	} else if (e.target.className == "button button-delete-all" || e.target.parentNode.className == "button button-delete-all") {
 		daftarList.innerHTML = "";
+		syncLocalStorage("hapus semua");
 	}
 });
+
+
+
 
 // untuk fitur mode gelap
 const buttonTheme = document.querySelector(".mode");

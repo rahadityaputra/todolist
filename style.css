@@ -108,7 +108,6 @@ body {
 .main {
     margin :10px auto;
     max-width: 500px;
-    height: 500px;
     padding: 20px;
     background-color: var(--primary-background);
     border: var(--border);
