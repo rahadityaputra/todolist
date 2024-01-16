@@ -157,7 +157,7 @@ body {
 
 .list {
     display: flex;
-    margin: 20px 0;
+    /* margin: 20px 0; */
     justify-content: space-evenly;
     align-items: center;
 }
