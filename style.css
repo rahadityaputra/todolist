@@ -63,7 +63,7 @@ table {
     --border-radius-icon : 50%;
 }
 
-:root.gelap {
+:root.dark {
     --primary-color : rgba(160, 231, 94, 0.971);
     --primary-color-font : black;
     --second-color-font : rgb(255, 255, 255);
