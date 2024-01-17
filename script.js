@@ -11,7 +11,11 @@ const buttonAlert = document.querySelector(".alert .button");
 const box_alert = document.querySelector(".alertWrapper");
 
 // ================= Menyambungkan Ke Local Storage ==================
-let program_todolist = {};
+let program_todolist = {
+	mode : "",
+	kumpulanList : {},
+	alert_muncul : true
+};
 
 if (localStorage["program_todolist"]) {
 	program_todolist = JSON.parse(localStorage["program_todolist"]);
@@ -21,7 +25,11 @@ if (localStorage["program_todolist"]) {
 	if (program_todolist["mode"]) {
 		ubahDataMode();
 	}
+	if(!program_todolist["alert_muncul"]) {
+		hideAlert();
+	}
 	tampilkanJumlahList(tampilList, program_todolist["jumlahList"]);
+
 }
 
 function syncLocalStorage(aktivitas, teks, status = false) {
@@ -142,14 +150,10 @@ function ubahMode(mode){
 
 
 
-// buttonAlert.addEventListener("click", hideAlert);
+buttonAlert.addEventListener("click", hideAlert);
 
-// function hideAlert() {
+function hideAlert() {
 	box_alert.style.display = "none";
-	// program_todolist.alert = false;
-	// return localStorage.setItem("program_todolist", JSON.stringify(program_todolist));
-// }
-
-// function syncLocalStorageAlert(params) {
-	
-// }
+	program_todolist.alert_muncul = false;
+	return localStorage.setItem("program_todolist", JSON.stringify(program_todolist));
+}
