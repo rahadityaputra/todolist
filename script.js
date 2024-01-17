@@ -7,6 +7,8 @@ const html = document.querySelector("html");
 const buttonAdd = document.querySelector(".button-add");
 const buttonDeleteAll = document.querySelector(".button-delete-all");
 const tampilList = document.querySelector(".tampilList");
+const buttonAlert = document.querySelector(".alert .button");
+const box_alert = document.querySelector(".alertWrapper");
 
 // ================= Menyambungkan Ke Local Storage ==================
 let program_todolist = {};
@@ -130,3 +132,24 @@ function ubahMode(mode){
 	}
 	
 }
+
+
+// membuat fitur alert pada saat halaman pertama di load
+// jadi jika user pertama kali membuka halaman maka akan ada alert selamat datang dari pemilik.
+// tetapi ketika user ingin membuka halaman lagi maka alert tidak akan muncul, jadi alert muncul saat pertama kali saja.
+// status user disimpan di local storage key program_todo_list. jika user pertama mengunjungi maka status diisi true,
+// ketika sudah pernah mengunjungi maka status diisi false.
+
+
+
+// buttonAlert.addEventListener("click", hideAlert);
+
+// function hideAlert() {
+	box_alert.style.display = "none";
+	// program_todolist.alert = false;
+	// return localStorage.setItem("program_todolist", JSON.stringify(program_todolist));
+// }
+
+// function syncLocalStorageAlert(params) {
+	
+// }
