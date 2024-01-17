@@ -175,6 +175,12 @@ body {
 }
 
 
+.tampilList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* css untuk icon */
 svg[data-slot="icon"] {
     width: 20px;

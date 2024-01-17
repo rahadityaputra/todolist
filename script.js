@@ -6,12 +6,10 @@ const buttonTheme = document.querySelector(".mode");
 const html = document.querySelector("html");
 const buttonAdd = document.querySelector(".button-add");
 const buttonDeleteAll = document.querySelector(".button-delete-all");
+const tampilList = document.querySelector(".tampilList");
 
 // ================= Menyambungkan Ke Local Storage ==================
-let program_todolist = {
-	mode : "",
-	kumpulanList : {}
-};
+let program_todolist = {};
 
 if (localStorage["program_todolist"]) {
 	program_todolist = JSON.parse(localStorage["program_todolist"]);
@@ -21,7 +19,7 @@ if (localStorage["program_todolist"]) {
 	if (program_todolist["mode"]) {
 		ubahDataMode();
 	}
-	// html.className = program_todolist["mode"];
+	tampilkanJumlahList(tampilList, program_todolist["jumlahList"]);
 }
 
 function syncLocalStorage(aktivitas, teks, status = false) {
@@ -39,6 +37,8 @@ function syncLocalStorage(aktivitas, teks, status = false) {
 			break;
 	}
 
+	program_todolist["jumlahList"] = Object.keys(program_todolist["kumpulanList"]).length;
+	tampilkanJumlahList(tampilList, program_todolist["jumlahList"]);
 	return localStorage.setItem("program_todolist", JSON.stringify(program_todolist));
 }
 
@@ -100,6 +100,10 @@ function cekAdaList(isiList) {
 function hapusSemuaList() {
 	daftarList.innerHTML = "";
 	syncLocalStorage("hapus semua");
+}
+
+function tampilkanJumlahList(penampil, jumlah) {
+	penampil.innerHTML = jumlah;
 }
 
 buttonAdd.addEventListener("click", tambahDataList);
