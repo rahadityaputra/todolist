@@ -1,0 +1,16 @@
+{
+	"name": "programtodolist",
+	"version": "1.0.0",
+	"description": "Ini adalah Sebuah Aplikasi To Do List berbasis Web.\r Aplikasi ini memiliki beberapa fitur yaitu :\r - Menambahkan list\r - Memberi penanda selesai pada list.\r - Menghapus list.\r - Menghapus semua list.\r - Menampilkan jumlah list.\r - Fitur Mode terang dan gelap",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"tailwindcss": "^3.4.9"
+	}
+}

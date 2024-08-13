@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+   <link rel="stylesheet" href="src/output.css">
+</head>
+
+<body class="bg-blue-50 text-blue-900 dark:bg-gray-900 dark:text-white transition-colors duration-300">
+
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-yellow-500 dark:text-yellow-400">My To-Do List</h1>
+        <button id="theme-toggle"
+          class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">Dark Mode</button>
+      </div>
+
+      <form class="flex items-center mb-4">
+        <input type="text" placeholder="Add a new task"
+          class="flex-grow px-4 py-2 border border-blue-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring focus:ring-yellow-500">
+        <button type="submit"
+          class="ml-2 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">Add</button>
+      </form>
+
+      <ul id="task-list">
+        <li class="flex items-center justify-between bg-blue-100 dark:bg-green-600 rounded-lg p-4 mb-2">
+          <span>Task 1</span>
+          <div class="flex">
+            <button
+              class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition mr-2">Done</button>
+            <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">Delete</button>
+          </div>
+        </li>
+        <li class="flex items-center justify-between bg-blue-100 dark:bg-gray-700 rounded-lg p-4 mb-2">
+          <span>Task 2</span>
+          <div class="flex">
+            <button
+              class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition mr-2">Done</button>
+            <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">Delete</button>
+          </div>
+        </li>
+        <li class="flex items-center justify-between bg-blue-100 dark:bg-gray-700 rounded-lg p-4 mb-2">
+          <span>Task 3</span>
+          <div class="flex">
+            <button
+              class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition mr-2">Done</button>
+            <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">Delete</button>
+          </div>
+        </li>
+      </ul>
+
+      <button id="delete-all"
+        class="w-full bg-red-500 text-white px-4 py-2 mt-4 rounded-lg hover:bg-red-600 transition">Delete All</button>
+    </div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const deleteAllButton = document.getElementById('delete-all');
+    const taskList = document.getElementById('task-list');
+    const body = document.body;
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if (body.classList.contains('dark')) {
+        themeToggle.textContent = 'Light Mode';
+      } else {
+        themeToggle.textContent = 'Dark Mode';
+      }
+    });
+
+    deleteAllButton.addEventListener('click', () => {
+      taskList.innerHTML = '';
+    });
+  </script>
+
+</body>
+
+</html>
