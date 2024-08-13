@@ -79,10 +79,10 @@ export function sortLists(lists) {
 		const currentlistStatus = a.status;
 		const nextlistStatus = b.status;
 		if (!currentlistStatus && nextlistStatus) {
-			return -1;
+			return 1;
 		}
 
-		return 1;
+		return -1;
 	})
 }
 

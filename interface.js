@@ -29,14 +29,14 @@ function changeThemeIcon(theme){
 }
 
 export function addListElement(isiList, status = false) {
-	const listTerbaru = `<div class="list ${status ? 'list-finish' : ''}">
+	const newList = `<div class="list ${status ? 'list-finish' : ''}">
 												<span class="text-white" >${isiList}</span>
 												<div class="flex">
 													<button class="button-status ${status ?'button-restore' : 'button-finish' }" data-status= "${status}">${status ? 'Restore' : 'Finish'}</button>
                         	<button class="delete bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition" >Delete</button>
 												</div>
 											</div>`;
-	boxList.innerHTML += listTerbaru;
+	boxList.insertAdjacentHTML('afterbegin', newList)
 }
 
 export function hideAlert() {
