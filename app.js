@@ -1,8 +1,8 @@
-import {boxAlert, changeTheme , hideAlert, changeStatus} from "./interface.js";
-import {addList, deleteList, deleteAllList} from "./database.js";
+import {boxAlert, changeTheme , hideAlert, changeStatus, deleteAllList} from "./interface.js";
+import {addList, deleteList} from "./database.js";
 const inputBox = document.querySelector('.box-input');
 const main = document.querySelector('.main');
-const panel = document.querySelector('.panel')
+const panel = document.querySelector('.panel');
 
 // use event delegation
 inputBox.addEventListener('click', function (event) {
@@ -20,11 +20,8 @@ main.addEventListener('click', function (event) {
 	if (element.matches('.delete')) {
 		deleteList(element);
 	} else if (element.matches('.button-status')) {
-		console.log(element.dataset.status);
-		
 		changeStatus(element.parentNode.parentNode, element ,element.parentNode.previousElementSibling, element.dataset.status);
 	} 
-	
 })
 
 panel.addEventListener('click', function (event) {

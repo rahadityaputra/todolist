@@ -20,8 +20,8 @@ Detail :
 yang harus dilakukan
 - membuat style untuk alert +++++
 - ketika alert sudah false tapi alert tetap muncul ++++
-- ketika list finish maka tombol done menjadi restore dengan background biru muda dan backgound list menjadi warna hijau kemudian posisi list bergeser ke urutan paling bawah
-- error saat delete all
-- cegah  bisa membuat list yang sama persis dengan list yang ada sebelumnya
-- ketika list/task udah done maka ketika di refers harusnya background berwarna hijau
+- ketika list finish maka tombol done menjadi restore dengan background biru muda dan backgound list menjadi warna hijau kemudian posisi list bergeser ke urutan paling bawah++
+- error saat delete all +++
+- cegah  bisa membuat list yang sama persis dengan list yang ada sebelumnya +++
+- ketika list/task udah done maka ketika di refers harusnya background berwarna hijau +++++
 

@@ -21,10 +21,12 @@
 				</button>
 			</div>
 		</div>
-
 	<!-- end of element -->
-	<div class="min-h-screen flex items-center justify-center">
+
+	<!-- main content-->
+	<main class="min-h-screen flex items-center justify-center">
 		<div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+			<!-- control -->
 			<div class="panel flex justify-between items-center mb-6">
 				<h1 class="text-2xl font-bold text-yellow-500 dark:text-yellow-400">DoneTask</h1>
 				<button id="theme-toggle"
@@ -34,7 +36,10 @@
 					Delete All
 				</button>
 			</div>
+			<!-- end of control -->
+
 			<div class="main">
+				<!-- input list -->
 				<form class="box-input flex">
 					<input type="text" name="input-list" id="input-list" placeholder="Contoh : Nonton Liverpool" maxlength="30"
 						required
@@ -44,10 +49,15 @@
 						Add
 					</button>
 				</form>
+				<!-- end of input list -->
+
+				<!-- lists -->
 				<div class="box-list mt-5"></div>
+				<!-- end of lists -->
 			</div>
 		</div>
-	</div>
+	</main>
+	<!-- end of main content -->
 	<script src="app.js" type="module"></script>
 </body>
 

@@ -17,9 +17,9 @@ export function getDataFromLocalStorage(key) {
 }
 
 
-export function syncLocalStorage(data, activity, text, listStatus = false) {
+export function syncLocalStorage(data, activity, text = null, listStatus = false) {
 	const index = data.lists.findIndex(({title, status}) => {
-		return title == text;
+		return title === text;
 	})
 	switch (activity) {
 		case "add":
@@ -47,7 +47,8 @@ export function syncLocalStorageTheme(theme) {
 
 
 export function addList(list) {
-	if (list != "" && !isListInData(list)) {
+	list = list.trim();
+	if (list != "" && !isListInData(data.lists, list)) {
 		syncLocalStorage(data, "add", list);
 		addListElement(list);
 	}
@@ -58,20 +59,13 @@ export function deleteList(tombolHapus) {
 	syncLocalStorage(data, "delete", tombolHapus.parentNode.previousElementSibling.innerText);
 }
 
-function isListInData(list) {
+function isListInData(lists, titleInput) {
 	let ada = false;
-	for(let list in data.list){
-		ada = (list === isiList);
-		if (ada === true) {
-			break;
-		}
-	}
-	return ada;
-}
-
-export function deleteAllList() {
-	daftarList.innerHTML = "";
-	syncLocalStorage("deleteAll");
+	
+	return lists.find(({title, ststus}) => {
+		return title === titleInput.trim();
+	});
+	// return ada;
 }
 
 export function sortLists(lists) {
@@ -85,10 +79,6 @@ export function sortLists(lists) {
 		return -1;
 	})
 }
-
-// const apalah = [false, true, false, false, true, true, false, true];
-// console.log(sortLists(apalah));
-
 
 // objek untuk menampung data dari local storage
 export const data = getDataFromLocalStorage('program_todolist');

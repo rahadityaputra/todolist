@@ -46,9 +46,7 @@ export function hideAlert() {
 	}
 
 // function untuk perubahan status list
-export function changeStatus(listWrapper, button, list, currentStatus) {
-	console.log(currentStatus);
-	
+export function changeStatus(listWrapper, button, list, currentStatus) {	
 	listWrapper.classList.toggle('list-finish');
 	if (currentStatus == 'true') {
 		button.classList.replace('button-restore', 'button-finish');
@@ -61,12 +59,14 @@ export function changeStatus(listWrapper, button, list, currentStatus) {
 		button.innerHTML = 'Restore';
 		syncLocalStorage(data, "changeStatus", list.innerText, true);
 	}
-
 	data.lists = sortLists(data.lists);
 	renderHtml(data.lists, data.theme, data.alert);
 }
 
-
+export function deleteAllList() {
+	boxList.innerHTML = "";
+	syncLocalStorage(data,"deleteAll");
+}
 
 function renderHtml(lists, theme, alert) {
 	boxList.innerHTML = '';
@@ -74,12 +74,11 @@ function renderHtml(lists, theme, alert) {
 			addListElement(title, status);
 		});
 		changeTheme(theme);
-
 		if (alert) {
 			boxAlert.style.display = 'flex';
 		}
 	}
-
 	
 // render data yang sudah didapatkan
 renderHtml(data.lists, data.theme, data.alert);
+
