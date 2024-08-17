@@ -24,4 +24,6 @@ yang harus dilakukan
 - error saat delete all +++
 - cegah  bisa membuat list yang sama persis dengan list yang ada sebelumnya +++
 - ketika list/task udah done maka ketika di refers harusnya background berwarna hijau +++++
+- menambahkan fitur darkmode dengan tailwindcss +++
+- membuat bagian / halaman about me untuk memperkenalkan pembuat to dolist dengan terdapat foto , media sosial , dan paragraf singkat dengan author
 

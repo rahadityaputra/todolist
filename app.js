@@ -1,5 +1,5 @@
-import {boxAlert, changeTheme , hideAlert, changeStatus, deleteAllList} from "./interface.js";
-import {addList, deleteList} from "./database.js";
+import {boxAlert, changeTheme , hideAlert, changeStatus, deleteAllList} from "./module/interface.js";
+import {addList, deleteList} from "./module/database.js";
 const inputBox = document.querySelector('.box-input');
 const main = document.querySelector('.main');
 const panel = document.querySelector('.panel');

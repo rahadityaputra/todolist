@@ -30,7 +30,7 @@ function changeThemeIcon(theme){
 
 export function addListElement(isiList, status = false) {
 	const newList = `<div class="list ${status ? 'list-finish' : ''}">
-												<span class="text-white" >${isiList}</span>
+												<span class="${status ? 'text-white': 'text-black'} dark:text-white" >${isiList}</span>
 												<div class="flex">
 													<button class="button-status ${status ?'button-restore' : 'button-finish' }" data-status= "${status}">${status ? 'Restore' : 'Finish'}</button>
                         	<button class="delete bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition" >Delete</button>
@@ -82,3 +82,14 @@ function renderHtml(lists, theme, alert) {
 // render data yang sudah didapatkan
 renderHtml(data.lists, data.theme, data.alert);
 
+let lastScrollTop = 0;
+window.addEventListener("scroll", function() {
+  const button = document.querySelector(".about-me");
+  let scrollTop = window.scrollY || document.documentElement.scrollTop;
+  if (scrollTop > lastScrollTop) {
+    button.style.display = "none"; // Sembunyikan tombol saat scroll ke bawah
+  } else {
+    button.style.display = "block"; // Tampilkan tombol saat scroll ke atas
+  }
+  lastScrollTop = scrollTop;
+});
